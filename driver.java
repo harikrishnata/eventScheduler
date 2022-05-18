@@ -15,12 +15,10 @@ public class driver{
     TitleScreen title;
     public static File event_file;
 
-    private static int breakDuration=10;
-
+    private static int breakDuration;
     public static void set_breakDuration(int time){
         breakDuration=time;
     }
-
     public static int get_breakDuration(){
         return breakDuration;
     }
@@ -42,7 +40,6 @@ public class driver{
 
 
         try {
-            //File input_file = new File("events.txt");
             Scanner reader = new Scanner(event_file);
             while (reader.hasNextLine()) {
               String data = reader.nextLine();
@@ -78,18 +75,10 @@ public class driver{
             for(int i=0;i<event_number;i++){
                 if(events[i].get_priority()==main_priority){
                     if(next){
-                        if(main_priority!=1){
-                            events[i].set_start(main_end+get_breakDuration());
-                            events[i].set_end(events[i].get_start()+events[i].get_duration());
-                            main_end+= (events[i].get_duration()+get_breakDuration());
-                            next=false;
-                        }
-                        else{
-                            events[i].set_start(main_end);
-                            events[i].set_end(events[i].get_start()+events[i].get_duration());
-                            main_end+= (events[i].get_duration());
-                            next=false;                            
-                        }
+                        events[i].set_start(main_end+get_breakDuration());
+                        events[i].set_end(events[i].get_start()+events[i].get_duration());
+                        main_end+= (events[i].get_duration()+get_breakDuration());
+                        next=false;
                     }
                     else{
                         events[i].set_end(main_start-get_breakDuration());
@@ -97,13 +86,9 @@ public class driver{
                         main_start-= (events[i].get_duration()+get_breakDuration());
                         next=true;                        
                     }
-                }
-                
-
+                } 
             }
-
         }
-
         System.out.println();
         System.out.println();
 
@@ -147,6 +132,4 @@ public class driver{
         }
 
     }
-      
-    
 }
