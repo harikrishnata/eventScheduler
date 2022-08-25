@@ -1,3 +1,0 @@
-    /**
-     * time the event starts
-    */ 
